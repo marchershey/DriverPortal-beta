@@ -29,6 +29,9 @@
                 <p class="text-lg font-semibold text-gray-700">
                     ${{number_format($rates->mileage, 3)}} <span class="text-sm text-gray-500">per mile</span>
                 </p>
+                <p class="text-xs text-gray-500">
+                    Next raise in 4 months - $0.400 ( <span class="text-green-500">+ $0.005</span> )
+                </p>
             </div>
         </div>
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs">
