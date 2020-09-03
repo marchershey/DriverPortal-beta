@@ -1,0 +1,5 @@
+mode: auto
+silent: true
+branchName: '${issue.number}--${issue.title,}'
+gitSafeReplacementChar: '-'
+autoCloseIssue: true
