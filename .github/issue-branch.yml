@@ -1,5 +1,5 @@
 mode: auto
-silent: true
+silent: false
 branchName: 'issue-${issue.number}_${issue.title,}'
 gitSafeReplacementChar: '-'
 autoCloseIssue: true
