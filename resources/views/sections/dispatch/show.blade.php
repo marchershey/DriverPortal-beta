@@ -20,7 +20,7 @@
 
         @include('layouts.alerts')
 
-        <div class="flex flex-wrap w-full bg-white mb-6 p-4 pb-0 rounded">
+        <div class="flex flex-wrap w-full bg-white mb-6 p-4 pb-0 rounded shadow-xs">
             <div class="w-full md:w-1/2 px-3 mb-6">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Reference Number
@@ -55,8 +55,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
         @if($dispatch->stop_count > 1)
         <div class="flex items-center justify-center bg-blue-500 text-white text-sm font-bold px-4 py-3 mb-6" role="alert">
             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -65,8 +65,60 @@
         </div>
         @endif
 
+        <div class="flex flex-wrap mb-6 md:grid-cols-2 xl:grid-cols-4">
+            <!-- Card -->
+            <div class="w-full mb-6 md:w-2/5 md:pr-6 md:mb-0">
+                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-xs">
+                    <div class="">
+                        <div class="rounded-full h-12 w-12 flex items-center justify-center bg-green-100 text-green-600 mr-4">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="md:w-full">
+                        <p class="mb-1 text-sm font-medium text-gray-600 uppercase">
+                            Gross Pay
+                        </p>
+                        <p class="text-3xl font-semibold text-green-600">
+                            $346.00
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-3/5 p-4 bg-white rounded-lg shadow-xs">
+                <div>
+                    <p class="mb-1 text-sm font-medium text-gray-600 uppercase">
+                        Itemized Pay
+                    </p>
+                    <hr class="mb-1">
+                    <table class="table-auto text-xs w-full" v-for="row in rows">
+                        <thead>
+                            <tr>
+                                <td class="font-bold text-sm">Paducha</td>
+                            </tr>
+                        </thead>
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="font-semibold">Miles</td>
+                            <td>(392 x $0.36)</td>
+                            <td class="text-right">$0.00</td>
+                        </tr>
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="font-semibold">Miles</td>
+                            <td>(392 x $0.36)</td>
+                            <td class="text-right">$0.00</td>
+                        </tr>
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="font-semibold">Miles</td>
+                            <td>(392 x $0.36)</td>
+                            <td class="text-right">$0.00</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
         @for ($i = 0; $i < $dispatch->stop_count; $i++)
-            <div class="flex flex-wrap w-full bg-white mb-6 p-4 pb-0 rounded">
+            <div class="flex flex-wrap w-full bg-white mb-6 p-4 pb-0 rounded shadow-xs">
                 <div class="w-full md:w-1/2 px-3 mb-6">
 
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
