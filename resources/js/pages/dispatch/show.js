@@ -120,6 +120,7 @@ $('.stop-type-selection')
                     .siblings('.stop-data-group')
                 var $stopDataMiles = $stopDataGroup.find('.miles')
                 var $stopDataDropHook = $stopDataGroup.find('.drophook')
+                var $stopDataStaleCount = $stopDataGroup.find('.stale')
                 var $stopDataTrayCount = $stopDataGroup.find('.tray')
                 var $stopDataRollOffCount = $stopDataGroup.find('.rolloff')
                 var $stopDataPackOutCount = $stopDataGroup.find('.packout')
@@ -140,6 +141,11 @@ $('.stop-type-selection')
                             .children('input')
                             .removeAttr('disabled')
 
+                        $stopDataStaleCount
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         $stopDataTrayCount
                             .slideUp()
                             .children()
@@ -179,6 +185,11 @@ $('.stop-type-selection')
                             .children('input')
                             .removeAttr('disabled')
 
+                        $stopDataStaleCount
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         $stopDataRollOffCount
                             .slideUp()
                             .children()
@@ -219,8 +230,53 @@ $('.stop-type-selection')
                             .children('input')
                             .removeAttr('disabled')
 
+                        $stopDataStaleCount
+                            .hide()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
+
                         $stopDataRollOffCount.slideUp()
                         $stopDataPackOutCount.slideUp()
+                        break
+                    case 'Stale Drop':
+                        $stopDataType.val('rolloff')
+                        $stopDataMiles
+                            .slideDown()
+                            .children()
+                            .children('input')
+                            .removeAttr('disabled')
+                        $stopDataDropHook
+                            .slideDown()
+                            .children()
+                            .children('input')
+                            .removeAttr('disabled')
+                        $stopDataStaleCount
+                            .slideDown()
+                            .children()
+                            .children('input')
+                            .removeAttr('disabled')
+
+                        $stopDataTrayCount
+                            .hide()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
+                        $stopDataRollOffCount
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
+                        $stopDataPackOutCount
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
+                        $stopDataDifferent
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         break
                     case '':
                         $stopDataType.val('')
@@ -256,8 +312,6 @@ $('.stop-type-selection')
                             .attr('disabled', 'disabled')
                         break
                 }
-
-                // $stopDataGroup.slideDown()
             })
     })
     .change()
@@ -277,6 +331,7 @@ function calcRate($input, value, data_type, stop_type) {
             stop_type: stop_type,
         },
         success: function(results) {
+            console.log(results)
             $input.text('$' + results)
         },
         complete: function() {
