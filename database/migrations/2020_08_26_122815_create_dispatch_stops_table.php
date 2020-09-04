@@ -21,6 +21,7 @@ class CreateDispatchStopsTable extends Migration
             $table->integer('type_id')->nullable();
             $table->integer('miles')->nullable();
             $table->integer('drop_hooks')->nullable();
+            $table->integer('stale_count')->nullable();
             $table->integer('tray_count')->nullable();
             $table->integer('roll_offs')->nullable();
             $table->integer('pack_outs')->nullable();

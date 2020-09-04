@@ -54535,6 +54535,7 @@ $('.stop-type-selection').change(function () {
     var $stopDataGroup = $(this).parent().parent().parent().siblings('.stop-data-group');
     var $stopDataMiles = $stopDataGroup.find('.miles');
     var $stopDataDropHook = $stopDataGroup.find('.drophook');
+    var $stopDataStaleCount = $stopDataGroup.find('.stale');
     var $stopDataTrayCount = $stopDataGroup.find('.tray');
     var $stopDataRollOffCount = $stopDataGroup.find('.rolloff');
     var $stopDataPackOutCount = $stopDataGroup.find('.packout');
@@ -54546,6 +54547,7 @@ $('.stop-type-selection').change(function () {
         $stopDataType.val('drop');
         $stopDataMiles.slideDown().children().children('input').removeAttr('disabled');
         $stopDataDropHook.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataStaleCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataTrayCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataRollOffCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataPackOutCount.slideUp().children().children('input').attr('disabled', 'disabled');
@@ -54557,6 +54559,7 @@ $('.stop-type-selection').change(function () {
         $stopDataMiles.slideDown().children().children('input').removeAttr('disabled');
         $stopDataDropHook.slideDown().children().children('input').removeAttr('disabled');
         $stopDataTrayCount.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataStaleCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataRollOffCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataPackOutCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataDifferent.slideUp().children().children('input').attr('disabled', 'disabled');
@@ -54568,8 +54571,20 @@ $('.stop-type-selection').change(function () {
         $stopDataDropHook.slideDown().children().children('input').removeAttr('disabled');
         $stopDataTrayCount.slideDown().children().children('input').removeAttr('disabled');
         $stopDataDifferent.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataStaleCount.hide().children().children('input').attr('disabled', 'disabled');
         $stopDataRollOffCount.slideUp();
         $stopDataPackOutCount.slideUp();
+        break;
+
+      case 'Stale Drop':
+        $stopDataType.val('rolloff');
+        $stopDataMiles.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataDropHook.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataStaleCount.slideDown().children().children('input').removeAttr('disabled');
+        $stopDataTrayCount.hide().children().children('input').attr('disabled', 'disabled');
+        $stopDataRollOffCount.slideUp().children().children('input').attr('disabled', 'disabled');
+        $stopDataPackOutCount.slideUp().children().children('input').attr('disabled', 'disabled');
+        $stopDataDifferent.slideUp().children().children('input').attr('disabled', 'disabled');
         break;
 
       case '':
@@ -54581,8 +54596,7 @@ $('.stop-type-selection').change(function () {
         $stopDataPackOutCount.slideUp().children().children('input').attr('disabled', 'disabled');
         $stopDataDifferent.slideUp().children().children('input').attr('disabled', 'disabled');
         break;
-    } // $stopDataGroup.slideDown()
-
+    }
   });
 }).change();
 
@@ -54601,6 +54615,7 @@ function calcRate($input, value, data_type, stop_type) {
       stop_type: stop_type
     },
     success: function success(results) {
+      console.log(results);
       $input.text('$' + results);
     },
     complete: function complete() {//
@@ -54710,8 +54725,8 @@ $(window).on("load orientationchange", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! X:\github\billing-tracker\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! X:\github\billing-tracker\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! X:\github\driver-portal-beta\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! X:\github\driver-portal-beta\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

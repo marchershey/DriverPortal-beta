@@ -145,6 +145,19 @@
                         </div>
                     </div>
 
+                    <div class="stop-data stale w-1/2 md:w-1/3 px-3 mb-6" style="display: none">
+                        <label class="stale-count-label block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Stale Count
+                        </label>
+                        <div class="relative">
+                            <input name="stops[{{$i}}][stale_count]" class="stop-data-input appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 pr-16 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="tel" placeholder="" value="{{$dispatch->stops[$i]->pivot->stale_count ?? '0'}}" disabled>
+                            <div class="stop-data-rate absolute inset-y-0 right-0 flex items-center px-2 text-xs">
+                                $0.00
+                            </div>
+                            <input type="hidden" class="stop-data-type" value="stale" />
+                        </div>
+                    </div>
+
                     <div class="stop-data tray w-1/2 md:w-1/3 px-3 mb-6" style="display: none">
                         <label class="tray-count-label block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                             Tray Count

@@ -25,6 +25,7 @@ class CreateDispatchStopTypesTable extends Migration
             ['name' => 'Drop & Hook'],
             ['name' => 'Roll Off'],
             ['name' => 'Pack Out'],
+            ['name' => 'Stale Drop'],
         ]);
     }
 

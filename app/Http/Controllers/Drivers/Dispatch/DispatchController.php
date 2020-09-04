@@ -138,6 +138,8 @@ class DispatchController extends Controller
             $amount = $data['value'] * $rates->mileage;
         } else if ($data['data_type'] == 'drops') {
             $amount = $data['value'] * $rates->mileage;
+        } else if ($data['data_type'] == 'stale') {
+            $amount = $data['value'] * $rates->stale;
         } else if ($data['data_type'] == 'tray') {
             if ($data['stop_type'] == 'rolloff') {
                 $amount = $data['value'] * $rates->roll_off;
@@ -150,7 +152,7 @@ class DispatchController extends Controller
             $amount = $data['value'] * $rates->pack_out;
         }
 
-        return round($amount, 2, PHP_ROUND_HALF_UP);
+        return number_format(round($amount, 2, PHP_ROUND_HALF_UP), 2);
     }
 
 }
