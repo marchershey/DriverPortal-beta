@@ -331,7 +331,6 @@ function calcRate($input, value, data_type, stop_type) {
             stop_type: stop_type,
         },
         success: function(results) {
-            console.log(results)
             $input.text('$' + results)
         },
         complete: function() {
