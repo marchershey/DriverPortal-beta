@@ -28,7 +28,7 @@ class Dispatch extends Model
 
     public function stops()
     {
-        return $this->belongsToMany('App\Warehouse', 'dispatch_stops')->withPivot('id', 'position', 'type_id', 'miles', 'drop_hooks', 'stale_count', 'tray_count', 'pack_outs', 'roll_offs', 'different')->withTimestamps()->orderBy('position');
+        return $this->belongsToMany('App\Warehouse', 'dispatch_stops')->withPivot('id', 'position', 'type_id', 'drop_hooks', 'stale_count', 'tray_count', 'pack_outs', 'roll_offs', 'pallets', 'different')->withTimestamps()->orderBy('position');
     }
 
     public function stop_types()

@@ -124,6 +124,7 @@ $('.stop-type-selection')
                 var $stopDataTrayCount = $stopDataGroup.find('.tray')
                 var $stopDataRollOffCount = $stopDataGroup.find('.rolloff')
                 var $stopDataPackOutCount = $stopDataGroup.find('.packout')
+                var $stopDataPallets = $stopDataGroup.find('.pallets')
                 var $stopDataDifferent = $stopDataGroup.find('.different')
                 var $stopDataType = $stopDataGroup.find('.stop-type')
 
@@ -141,6 +142,11 @@ $('.stop-type-selection')
                             .children('input')
                             .removeAttr('disabled')
 
+                        $stopDataPallets
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         $stopDataStaleCount
                             .slideUp()
                             .children()
@@ -184,9 +190,14 @@ $('.stop-type-selection')
                             .children()
                             .children('input')
                             .removeAttr('disabled')
+                        $stopDataPallets
+                            .slideDown()
+                            .children()
+                            .children('input')
+                            .removeAttr('disabled')
 
                         $stopDataStaleCount
-                            .slideUp()
+                            .hide()
                             .children()
                             .children('input')
                             .attr('disabled', 'disabled')
@@ -229,6 +240,11 @@ $('.stop-type-selection')
                             .children()
                             .children('input')
                             .removeAttr('disabled')
+                        $stopDataPallets
+                            .slideDown()
+                            .children()
+                            .children('input')
+                            .removeAttr('disabled')
 
                         $stopDataStaleCount
                             .hide()
@@ -257,6 +273,11 @@ $('.stop-type-selection')
                             .children('input')
                             .removeAttr('disabled')
 
+                        $stopDataPallets
+                            .hide()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         $stopDataTrayCount
                             .hide()
                             .children()
@@ -305,6 +326,11 @@ $('.stop-type-selection')
                             .children()
                             .children('input')
                             .attr('disabled', 'disabled')
+                        $stopDataPallets
+                            .slideUp()
+                            .children()
+                            .children('input')
+                            .attr('disabled', 'disabled')
                         $stopDataDifferent
                             .slideUp()
                             .children()
@@ -317,6 +343,8 @@ $('.stop-type-selection')
     .change()
 
 function calcRate($input, value, data_type, stop_type) {
+    stop_type = stop_type || 'roll_off'
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -341,13 +369,17 @@ function calcRate($input, value, data_type, stop_type) {
 
 $('.stop-data-input')
     .on('keypress', function(e) {
-        var verified = e.which == 8 || e.which == undefined || e.which == 0 ? null : String.fromCharCode(e.which).match(/[^0-9]/)
+        var verified = e.which == 13 || e.which == 8 || e.which == undefined || e.which == 0 ? null : String.fromCharCode(e.which).match(/[^0-9]/)
         if (verified) {
             e.preventDefault()
         }
     })
     .on('focus', function() {
-        $(this).val('')
+        // var fieldInput = $('#fieldName')
+        // var fldLength = fieldInput.val().length
+        // $(this).putCursorAtEnd()
+        // $(this)[0].setSelectionRange($(this).val().length, $(this).val().length)
+        // console.log('test')
     })
     .on('blur', function() {
         if ($(this).val() == '') {

@@ -28,24 +28,12 @@
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                    Stop Count
-                </label>
-                <input name="stop_count" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="number" value="{{old('stop_count') ?? '1'}}" min="1" max="10">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Starting Date
-                </label>
-                <input name="starting_date" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm" type="date" value="{{ old('starting_date') ?? date('Y-m-d') }}">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                     Status
                 </label>
                 <div class="relative">
                     <select name="status" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         @foreach($statuses as $status)
-                        <option value="{{$status->id}}" {{ (old('status') == $status->id ?? $status->driver_default == 1) ? 'selected' : '' }}>{{$status->name}}</option>
+                        <option value="{{$status->id}}" {{ (is_null(old('status')) ? (($status->driver_default == 1) ? 'selected' : '') : ((old('status') == $status->id) ? 'selected' : '')) }}>{{$status->name}}</option>
                         @endforeach
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -54,9 +42,25 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="text-xs text-gray-500 w-full text-center">
-            All fields are required.
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Stop Count
+                </label>
+                <input name="stop_count" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="number" value="{{old('stop_count') ?? '1'}}" min="1" max="10">
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Estimated Miles
+                </label>
+                <input name="miles" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="tel" value="{{old('miles') ?? '0'}}">
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Starting Date
+                </label>
+                <input name="starting_date" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm" type="date" value="{{ old('starting_date') ?? date('Y-m-d') }}">
+            </div>
+
         </div>
     </form>
 

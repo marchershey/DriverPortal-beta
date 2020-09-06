@@ -29,18 +29,6 @@
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                    Stop Count
-                </label>
-                <input name="stop_count" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="number" value="{{$dispatch->stop_count}}" min="1" max="10">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Starting Date
-                </label>
-                <input name="starting_date" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm" type="date" value="{{ $dispatch->starting_date }}">
-            </div>
-            <div class="w-full md:w-1/2 px-3 mb-6">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                     Status
                 </label>
                 <div class="relative">
@@ -55,6 +43,36 @@
                     </div>
                 </div>
             </div>
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Stop Count
+                </label>
+                <div class="relative group">
+                    <input name="stop_count" class="stop-data-input appearance-none block pr-10 w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="number" value="{{$dispatch->stop_count}}" min="1" max="10">
+                    <div class="stop-data-rate absolute inset-y-0 right-0 flex items-center px-2 text-xs">
+                        $0.00
+                    </div>
+                    <input type="hidden" class="stop-data-type" value="stop" />
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Estimated Miles
+                </label>
+                <div class="relative group">
+                    <input name="miles" class="stop-data-input appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 uppercase" type="tel" value="{{$dispatch->miles}}">
+                    <div class="stop-data-rate absolute inset-y-0 right-0 flex items-center px-2 text-xs">
+                        $0.00
+                    </div>
+                    <input type="hidden" class="stop-data-type" value="miles" />
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Starting Date
+                </label>
+                <input name="starting_date" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm" type="date" value="{{ $dispatch->starting_date }}">
+            </div>
         </div>
 
         @if($dispatch->stop_count > 1)
@@ -68,18 +86,18 @@
         <div class="flex flex-wrap mb-6 md:grid-cols-2 xl:grid-cols-4">
             <!-- Card -->
             <div class="w-full mb-6 md:w-2/5 md:pr-6 md:mb-0">
-                <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-xs">
+                <div class="flex justify-center items-center p-4 bg-white rounded-lg shadow-xs">
                     <div class="">
                         <div class="rounded-full h-12 w-12 flex items-center justify-center bg-green-100 text-green-600 mr-4">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
                     </div>
                     <div class="md:w-full">
-                        <p class="mb-1 text-sm font-medium text-gray-600 uppercase">
+                        <p class="mb-1 text-sm font-medium text-gray-600 text-center uppercase">
                             Gross Pay
                         </p>
-                        <p class="text-3xl font-semibold text-green-600">
-                            $346.00
+                        <p class="text-3xl font-semibold text-green-600 text-center">
+                            ${{number_format($dispatch->pay, 2)}}
                         </p>
                     </div>
                 </div>
@@ -91,27 +109,67 @@
                     </p>
                     <hr class="mb-1">
                     <table class="table-auto text-xs w-full" v-for="row in rows">
-                        <thead>
-                            <tr>
-                                <td class="font-bold text-sm">Paducha</td>
-                            </tr>
-                        </thead>
+
                         <tr class="odd:bg-white even:bg-gray-100">
                             <td class="font-semibold">Miles</td>
-                            <td>(392 x $0.36)</td>
-                            <td class="text-right">$0.00</td>
-                        </tr>
-                        <tr class="odd:bg-white even:bg-gray-100">
-                            <td class="font-semibold">Miles</td>
-                            <td>(392 x $0.36)</td>
-                            <td class="text-right">$0.00</td>
-                        </tr>
-                        <tr class="odd:bg-white even:bg-gray-100">
-                            <td class="font-semibold">Miles</td>
-                            <td>(392 x $0.36)</td>
-                            <td class="text-right">$0.00</td>
+                            <td>{{$dispatch->miles}} x ${{number_format(Auth::user()->rates->mileage, 3)}}</td>
+                            <td class="text-right">${{ number_format((($dispatch->miles) * Auth::user()->rates->mileage), 2)}}</td>
                         </tr>
 
+                        @if($dispatch->stop_count > 1)
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="font-semibold">Stop Pay</td>
+                            <td>{{$dispatch->stop_count - 1}} x ${{number_format(Auth::user()->rates->stop_pay, 2)}}</td>
+                            <td class="text-right">${{ number_format((($dispatch->stop_count - 1) * number_format(Auth::user()->rates->stop_pay, 2)), 2)}}</td>
+                        </tr>
+                        @endif
+
+
+                        @for ($i = 0; $i < $dispatch->stop_count; $i++)
+                            @if(isset($dispatch->stops[$i]->name))
+                            <tr>
+                                <td class="font-bold text-sm pt-4">{{$dispatch->stops[$i]->name}}</td>
+                            </tr>
+
+                            @if(isset($dispatch->stops[$i]->pivot->drop_hooks))
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="font-semibold pl-4">Drop & Hooks</td>
+                                <td>{{$dispatch->stops[$i]->pivot->drop_hooks}} x ${{number_format(Auth::user()->rates->drop_hook, 2)}}</td>
+                                <td class="text-right">${{number_format($dispatch->stops[$i]->pivot->drop_hooks * number_format(Auth::user()->rates->drop_hook, 2), 2)}}</td>
+                            </tr>
+                            @endif
+
+                            @if(isset($dispatch->stops[$i]->pivot->stale_count))
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="font-semibold pl-4">Stale Pay</td>
+                                <td>{{$dispatch->stops[$i]->pivot->stale_count}} x ${{number_format(Auth::user()->rates->stale, 2)}}</td>
+                                <td class="text-right">${{number_format($dispatch->stops[$i]->pivot->stale_count * number_format(Auth::user()->rates->stale, 2), 2)}}</td>
+                            </tr>
+                            @endif
+                            @if(isset($dispatch->stops[$i]->pivot->roll_offs))
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="font-semibold pl-4">Roll Off</td>
+                                <td>{{$dispatch->stops[$i]->pivot->roll_offs}} x ${{number_format(Auth::user()->rates->roll_off, 4)}}</td>
+                                <td class="text-right">${{number_format($dispatch->stops[$i]->pivot->roll_offs * number_format(Auth::user()->rates->roll_off, 4), 2)}}</td>
+                            </tr>
+                            @endif
+                            @if(isset($dispatch->stops[$i]->pivot->pack_outs))
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="font-semibold pl-4">Pack Out</td>
+                                <td>{{$dispatch->stops[$i]->pivot->pack_outs}} x ${{number_format(Auth::user()->rates->pack_out, 4)}}</td>
+                                <td class="text-right">${{number_format($dispatch->stops[$i]->pivot->pack_outs * number_format(Auth::user()->rates->pack_out, 4), 2)}}</td>
+                            </tr>
+                            @endif
+                            @if(isset($dispatch->stops[$i]->pivot->pallets))
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="font-semibold pl-4">Pallets</td>
+                                <td>{{$dispatch->stops[$i]->pivot->pallets}} x ${{number_format(Auth::user()->rates->pallet, 2)}}</td>
+                                <td class="text-right">${{number_format($dispatch->stops[$i]->pivot->pallets * number_format(Auth::user()->rates->pallet, 4), 2)}}</td>
+                            </tr>
+                            @endif
+
+                            @endif
+                            @endfor
                     </table>
                 </div>
             </div>
@@ -171,19 +229,6 @@
                 <div class="stop-data-group flex flex-wrap w-full">
                     <input type="hidden" class="stop-type" value="">
 
-                    <div class="stop-data miles w-1/2 md:w-1/3 px-3 mb-6 flex flex-wrap" style="display: none">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                            Estimated Miles
-                        </label>
-                        <div class="relative group">
-                            <input name="stops[{{$i}}][miles]" class="stop-data-input appearance-none inline w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 pr-16 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="tel" placeholder="" value="{{$dispatch->stops[$i]->pivot->miles ?? '0'}}" disabled>
-                            <div class="stop-data-rate absolute inset-y-0 right-0 flex items-center px-2 text-xs">
-                                $0.00
-                            </div>
-                            <input type="hidden" class="stop-data-type" value="miles" />
-                        </div>
-                    </div>
-
                     <div class="stop-data drophook w-1/2 md:w-1/3 px-3 mb-6" style="display: none">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                             Drop & Hooks
@@ -207,6 +252,19 @@
                                 $0.00
                             </div>
                             <input type="hidden" class="stop-data-type" value="stale" />
+                        </div>
+                    </div>
+
+                    <div class="stop-data pallets w-1/2 md:w-1/3 px-3 mb-6" style="display: none">
+                        <label class="pallets-label block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                            Pallets
+                        </label>
+                        <div class="relative">
+                            <input name="stops[{{$i}}][pallets]" class="stop-data-input appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 pr-16 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="tel" placeholder="" value="{{$dispatch->stops[$i]->pivot->pallets ?? '0'}}" disabled>
+                            <div class="stop-data-rate absolute inset-y-0 right-0 flex items-center px-2 text-xs">
+                                $0.00
+                            </div>
+                            <input type="hidden" class="stop-data-type" value="pallets" />
                         </div>
                     </div>
 
