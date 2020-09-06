@@ -117,8 +117,8 @@
                             {{date('m-d-Y', strtotime($dispatch->starting_date))}}
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-xs font-mono text-center">
-                            $863.45
+                        <td class="px-4 py-3 text-xs font-mono text-center text-green-600">
+                            ${{number_format($dispatch->pay, 2)}}
                         </td>
                     </tr>
                     @endforeach

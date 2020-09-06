@@ -9,6 +9,7 @@ try {
     window.moment = require('moment')
     require('@fortawesome/fontawesome-free/js/all')
     require('./utils/updateVh')
+    require('./utils/putCursorAtEnd')
     // pages / sections
     require('./layout/alerts')
     require('./layout/header')

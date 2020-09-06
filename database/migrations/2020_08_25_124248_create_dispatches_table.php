@@ -16,6 +16,8 @@ class CreateDispatchesTable extends Migration
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->integer('reference_number');
+            $table->float('pay', 6, 2)->default('0.00');
+            $table->integer('miles');
             $table->integer('stop_count');
             $table->string('starting_date');
             $table->integer('status_id');

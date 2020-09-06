@@ -47,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function rates()
     {
-        return $this->hasOne('App\UserRate');
+        return $this->hasOne('App\UserRate')->withDefault('mileage');
     }
 
     public function settings()
