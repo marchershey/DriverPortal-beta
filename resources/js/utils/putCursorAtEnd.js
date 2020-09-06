@@ -32,6 +32,6 @@ $.fn.putCursorAtEnd = function() {
     })
 }
 
-$(document).on('focus', 'input[type="text"], input[type="tel"]', function() {
-    $(this).putCursorAtEnd()
-})
+// $(document).on('focus', 'input[type="text"], input[type="tel"]', function() {
+//     $(this).putCursorAtEnd()
+// })
