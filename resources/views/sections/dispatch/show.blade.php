@@ -191,8 +191,11 @@
                         </div>
                         <div class="absolute stop-results-container -mt-1 bg-white w-full z-10 border border-gray-500" style="display: none">
                             <div class="stop-no-results block p-2 border-b hover:bg-gray-100 cursor-pointer" style="display: none">
-                                <h1 class="text-sm font-semibold">
-                                    No results found.
+                                <h1 class="text-sm font-semibold text-center">
+                                    No warehouse found.
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 mt-4 rounded">
+                                        Add new warehouse
+                                    </button>
                                 </h1>
                                 {{-- <div class="text-center">
                                     <div class="mb-3">

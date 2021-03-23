@@ -96,20 +96,7 @@ class DispatchController extends Controller
                     $data['stops'][$key]['roll_offs'] = $stop['tray_count'];
                     $data['stops'][$key]['pack_outs'] = $stop['tray_count'];
                 }
-
-                // $data['stops'][$key]['roll_offs'] = $stop['tray_count'];
-                // $data['stops'][$key]['pack_outs'] = $stop['tray_count'];
             }
-
-            // if pack out
-            // if tray count
-
-            // {
-            //     if (isset($stop['tray_count'])) {
-            //         $data['stops'][$key]['roll_offs'] = $stop['tray_count'];
-            //         $data['stops'][$key]['pack_outs'] = $stop['tray_count'];
-            //     }
-            // }
 
             if (!isset($stop['different'])) {
                 $data['stops'][$key]['different'] = 'off';
